@@ -1,31 +1,37 @@
 #include <stdio.h>
 
 int main() {
-    int N;
+    int N = 0;
     char caracteres[20];
     int i; 
-    
-    printf("Digite o comprimento da senha (1 a 20): ");
-    scanf("%d", &N);
-    
-    if (N < 1 || N > 20) {
-        printf("Comprimento invalido! Deve estar entre 1 e 20.\n");
-        return 0;
-    }
-    
-    printf("Digite os %d carateres (um por um, pressionando Enter ou espaco):\n", N);
+    int resultado_scanf;
+
+    do {
+        printf("Digite o comprimento da senha (1 a 20): ");
+        resultado_scanf = scanf("%d", &N);
+        
+        while (getchar() != '\n'); 
+
+        if (resultado_scanf != 1 || N < 1 || N > 20) {
+            printf("[Erro] Comprimento invalido! Deve ser um numero inteiro entre 1 e 20.\n\n");
+        }
+    } while (N < 1 || N > 20);
+
+    printf("Digite os %d caracteres (pressionando Enter ou espaco entre eles):\n", N);
     for (i = 0; i < N; i++) {
         scanf(" %c", &caracteres[i]);
     }
     
+    while (getchar() != '\n');
+
     int tem_minuscula = 0;
     int tem_maiuscula = 0;
     int tem_digito = 0;
     int tem_simbolo = 0;
-    
+
     for (i = 0; i < N; i++) {
         char c = caracteres[i];
-        
+
         if (c >= 'a' && c <= 'z') {
             tem_minuscula = 1;
         } 
@@ -39,18 +45,18 @@ int main() {
             tem_simbolo = 1;
         }
     }
-    
+
     int total_categorias = tem_minuscula + tem_maiuscula + tem_digito + tem_simbolo;
-    
+
     printf("\n--- RESULTADO DA AUDITORIA DIDATICA ---\n");
-    printf("Comprimento: %d carateres\n", N);
+    printf("Comprimento: %d caracteres\n", N);
     printf("Categorias distintas encontradas: %d\n", total_categorias);
-    
+
     if (N < 8 || total_categorias < 3) {
         printf("Avaliacao: REVISAR\n");
     } else {
         printf("Avaliacao: ATENDE A REGRA DIDATICA\n");
     }
-    
+
     return 0;
 }
