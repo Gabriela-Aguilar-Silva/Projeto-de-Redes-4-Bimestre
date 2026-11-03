@@ -3,7 +3,7 @@
 int main() {
     int N;
     char caracteres[20];
-    int i; // Declarar a variável i aqui em cima resolve o erro do compilador
+    int i; 
     
     printf("Digite o comprimento da senha (1 a 20): ");
     scanf("%d", &N);
